@@ -1,11 +1,7 @@
-from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import create_postgres_engine
-
-
-class Base(DeclarativeBase):
-    pass
+from models.base import Base
 
 
 class Fart(Base):
