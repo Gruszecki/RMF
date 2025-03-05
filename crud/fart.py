@@ -1,11 +1,11 @@
 from sqlalchemy.orm import Session
 
-import models.fart
-from schemas.fart import Fart
+import models.models
+from schemas.fart import FartCreate
 
 
-def create_fart(db: Session, fart: Fart) -> models.fart.Fart | None:
-    db_fart = models.fart.Fart(**fart.model_dump())
+def create_fart(db: Session, fart: FartCreate) -> models.models.Fart | None:
+    db_fart = models.models.Fart(**fart.model_dump())
     if db_fart:
         db.add(db_fart)
         db.commit()
