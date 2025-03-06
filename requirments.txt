@@ -1,5 +1,6 @@
 fastapi
 psycopg2
 pydantic
+requests
 sqlalchemy
 uvicorn

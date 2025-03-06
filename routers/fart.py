@@ -10,9 +10,9 @@ router = APIRouter(
 )
 
 
-@router.post('/', response_model=bool)
+@router.post('/')
 async def add_fart(fart: FartCreate, db: DBDep):
-    return bool(await services.fart.add_fart(fart=fart, db=db))
+    return await services.fart.add_fart(fart=fart, db=db)
 
 
 @router.get('/')

@@ -16,5 +16,5 @@ async def create_fart(db: Session, fart: FartCreate) -> models.models.Fart | Non
     return None
 
 
-async def get_farts(db: Session) -> list[Type[models.models.Fart]]:
+async def get_farts_by_votes_asc(db: Session) -> list[Type[models.models.Fart]]:
     return db.query(models.models.Fart).order_by(models.models.Fart.number_of_votes.asc()).all()
