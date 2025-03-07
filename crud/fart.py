@@ -33,8 +33,8 @@ async def update_rating(db: AsyncSession, fart_id: int, new_score: int) -> float
         update(Fart)
         .where(Fart.id == fart_id)
         .values(
-            sum_votes=Fart.score_sum + new_score,
-            num_votes=Fart.number_of_votes + 1
+            score_sum=Fart.score_sum + new_score,
+            number_of_votes=Fart.number_of_votes + 1
         )
         .returning(Fart.score_sum, Fart.number_of_votes)
     )

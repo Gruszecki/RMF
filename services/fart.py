@@ -30,4 +30,4 @@ async def update_fart_rate(db: AsyncSession, fart_id: int, new_score: int):
             detail="Fart not found"
         )
 
-    await crud.fart.update_rating(db=db, fart_id=fart_id, new_score=new_score)
+    return await crud.fart.update_rating(db=db, fart_id=fart_id, new_score=new_score)
