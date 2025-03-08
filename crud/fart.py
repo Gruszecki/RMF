@@ -23,7 +23,12 @@ async def get_fart_by_id(db: AsyncSession, fart_id: int) -> Fart | None:
     return result.scalar_one_or_none()
 
 
-async def get_farts_by_votes_asc(db: AsyncSession) -> Sequence[Fart]:
+async def get_farts_from_list(db: AsyncSession, fart_list: list[int]) -> Sequence[Fart] | None:
+    result = await db.execute(select(Fart).where(Fart.id.in_(fart_list)).order_by(Fart.id.asc()))
+    return result.scalars().all()
+
+
+async def get_farts_by_votes_asc(db: AsyncSession) -> Sequence[Fart] | None:
     result = await db.execute(select(Fart).order_by(Fart.number_of_votes.asc()))
     return result.scalars().all()
 

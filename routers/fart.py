@@ -1,4 +1,6 @@
-from fastapi import APIRouter
+from typing import List
+
+from fastapi import APIRouter, Query
 
 import services.fart
 from dependencies import DBDep
@@ -18,6 +20,13 @@ async def add_fart(db: DBDep, fart: FartCreate):
 @router.get('/')
 async def get_farts(db: DBDep):
     return await services.fart.get_all_farts(db=db)
+
+
+@router.get('/list/')
+async def get_farts_from_list(db: DBDep, farts_list: List[int] = Query([])):
+    if not farts_list:
+        return []
+    return await services.fart.get_farts_list(db=db, fart_list=farts_list)
 
 
 @router.put('/')
