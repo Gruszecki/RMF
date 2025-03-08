@@ -21,6 +21,10 @@ async def get_all_farts(db: AsyncSession):
     return await crud.fart.get_farts_by_votes_asc(db)
 
 
+async def get_fart_by_id(db: AsyncSession, fart_id: int):
+    return await crud.fart.get_fart_by_id(db=db, fart_id=fart_id)
+
+
 async def get_farts_by_score(db: AsyncSession):
     return await crud.fart.get_farts_by_score_desc(db)
 
