@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from sqlalchemy import update
+from sqlalchemy import case, func, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
@@ -30,6 +30,19 @@ async def get_farts_from_list(db: AsyncSession, fart_list: list[int]) -> Sequenc
 
 async def get_farts_by_votes_asc(db: AsyncSession) -> Sequence[Fart] | None:
     result = await db.execute(select(Fart).order_by(Fart.number_of_votes.asc()))
+    return result.scalars().all()
+
+
+async def get_farts_by_score_desc(db: AsyncSession) -> Sequence[Fart] | None:
+    result = await db.execute(
+        select(Fart)
+        .order_by(
+            (Fart.score_sum / case(
+                (Fart.number_of_votes == 0, 1),
+                else_=Fart.number_of_votes
+            )).desc()
+        )
+    )
     return result.scalars().all()
 
 

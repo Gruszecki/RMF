@@ -22,7 +22,12 @@ async def get_farts(db: DBDep):
     return await services.fart.get_all_farts(db=db)
 
 
-@router.get('/list/')
+@router.get('/ranking')
+async def get_farts(db: DBDep):
+    return await services.fart.get_farts_by_score(db=db)
+
+
+@router.get('/list')
 async def get_farts_from_list(db: DBDep, farts_list: List[int] = Query([])):
     if not farts_list:
         return []
