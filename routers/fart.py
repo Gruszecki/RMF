@@ -33,8 +33,8 @@ async def get_fart_by_id(db: DBDep, fart_id: int):
 
 
 @router.get('/ranking')
-async def get_farts_ranking(db: DBDep):
-    return await services.fart.get_farts_by_score(db=db)
+async def get_farts_ranking(db: DBDep, page: int = 0, page_size: int = 20):
+    return await services.fart.get_farts_by_score(db=db, page=page, page_size=page_size)
 
 
 @router.get('/list')

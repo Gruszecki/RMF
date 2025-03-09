@@ -33,7 +33,9 @@ async def get_farts_by_votes_asc(db: AsyncSession) -> Sequence[Fart] | None:
     return result.scalars().all()
 
 
-async def get_farts_by_score_desc(db: AsyncSession) -> Sequence[Fart] | None:
+async def get_farts_by_score_desc(db: AsyncSession, page: int = 0, page_size: int = 20) -> Sequence[Fart] | None:
+    offset = page * page_size
+
     result = await db.execute(
         select(Fart)
         .order_by(
@@ -42,6 +44,8 @@ async def get_farts_by_score_desc(db: AsyncSession) -> Sequence[Fart] | None:
                 else_=Fart.number_of_votes
             )).desc()
         )
+        .offset(offset)
+        .limit(page_size)
     )
     return result.scalars().all()
 

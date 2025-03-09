@@ -25,8 +25,8 @@ async def get_fart_by_id(db: AsyncSession, fart_id: int):
     return await crud.fart.get_fart_by_id(db=db, fart_id=fart_id)
 
 
-async def get_farts_by_score(db: AsyncSession):
-    return await crud.fart.get_farts_by_score_desc(db)
+async def get_farts_by_score(db: AsyncSession, page: int = 0, page_size: int = 20):
+    return await crud.fart.get_farts_by_score_desc(page=page, page_size=page_size, db=db)
 
 
 async def get_farts_list(db: AsyncSession, fart_list: list[int]):
